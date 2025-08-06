@@ -17,8 +17,8 @@ export function AppCard({ app, rank, layout = 'list' }: AppCardProps) {
 
   if (layout === 'grid') {
     return (
-        <Link href={`/app/${app.id}`} className="block group">
-            <div className="aspect-video rounded-lg overflow-hidden border mb-4">
+        <Link href={`/app/${app.id}`} className="block group bg-card p-4 rounded-lg border hover:border-primary/50 transition-colors">
+            <div className="aspect-video rounded-md overflow-hidden border mb-4">
                 <Image
                 src={app.image}
                 alt={app.name}
@@ -29,10 +29,10 @@ export function AppCard({ app, rank, layout = 'list' }: AppCardProps) {
                 />
             </div>
             <h3 className="font-bold font-headline text-lg group-hover:text-primary transition-colors">{app.name}</h3>
-            <p className="text-muted-foreground text-sm mt-1">{app.description}</p>
-            <div className="mt-2 flex items-center justify-between">
+            <p className="text-muted-foreground text-sm mt-1 line-clamp-2">{app.description}</p>
+            <div className="mt-3 flex items-center justify-between">
                 <div className="flex flex-wrap gap-2">
-                    {app.categories.slice(0, 2).map((category) => (
+                    {app.categories.slice(0, 1).map((category) => (
                         <Badge key={category} variant="secondary">{category}</Badge>
                     ))}
                 </div>
