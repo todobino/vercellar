@@ -16,6 +16,7 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { VercelApp } from '@/lib/types';
+import { Badge } from './ui/badge';
 
 interface MainNavProps {
   apps: VercelApp[];
@@ -26,12 +27,18 @@ export function MainNav({ apps }: MainNavProps) {
   const newApps = [...apps]
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 5);
-  const toolApps = apps
-    .filter((app) => app.categories.includes('Developer Tools'))
-    .slice(0, 5);
-  const gameApps = apps
-    .filter((app) => app.categories.includes('Games'))
-    .slice(0, 5);
+  
+  const toolCategories = [
+      {title: "Developer Tools", description: "Tools for software developers."},
+      {title: "Productivity", description: "Boost your efficiency."},
+      {title: "Marketing", description: "Tools for marketing and growth."},
+      {title: "AI", description: "The future is now."}
+  ]
+
+  const gameCategories = [
+      {title: "Games", description: "Fun and interactive experiences."},
+      {title: "Art & Design", description: "Create and explore visuals."}
+  ]
 
   return (
     <div className="mr-4 hidden md:flex">
@@ -58,16 +65,15 @@ export function MainNav({ apps }: MainNavProps) {
               <NavigationMenuTrigger>Tools</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                  {toolApps.map((app) => (
+                  {toolCategories.map((cat) => (
                     <ListItem
-                      key={app.name}
-                      title={app.name}
-                      href={`/app/${app.id}`}
+                      key={cat.title}
+                      title={cat.title}
+                      href="#"
                     >
-                      {app.description}
+                      {cat.description}
                     </ListItem>
                   ))}
-                   {!toolApps.length && <p className="p-4 text-sm text-muted-foreground">No tools yet. Submit one!</p>}
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
@@ -75,16 +81,15 @@ export function MainNav({ apps }: MainNavProps) {
               <NavigationMenuTrigger>Games</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                   {gameApps.map((app) => (
+                   {gameCategories.map((cat) => (
                     <ListItem
-                      key={app.name}
-                      title={app.name}
-                      href={`/app/${app.id}`}
+                      key={cat.title}
+                      title={cat.title}
+                      href="#"
                     >
-                      {app.description}
+                      {cat.description}
                     </ListItem>
                   ))}
-                  {!gameApps.length && <p className="p-4 text-sm text-muted-foreground">No games yet. Submit one!</p>}
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
