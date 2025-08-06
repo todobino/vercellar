@@ -11,7 +11,7 @@ export default function Home() {
           Welcome to Vercellar
         </h1>
         <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-          Discover, vote, and submit the best applications hosted on Vercel.
+          The leading directory of community promoted and audited vibe apps on Vercel
         </p>
       </section>
 
