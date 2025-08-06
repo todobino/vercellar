@@ -4,6 +4,7 @@ import { AuthProvider } from '@/contexts/auth-provider';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
 
 export const metadata: Metadata = {
   title: 'Vercellar - App Directory',
@@ -35,6 +36,7 @@ export default function RootLayout({
             <Header />
             <main className="flex-grow">{children}</main>
             <Toaster />
+            <Footer />
           </div>
         </AuthProvider>
       </body>
