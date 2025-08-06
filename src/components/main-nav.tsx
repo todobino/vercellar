@@ -88,6 +88,20 @@ export function MainNav({ apps }: MainNavProps) {
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
+             <NavigationMenuItem>
+              <Link href="#" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Resources
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="#" legacyBehavior passHref>
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Community
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </nav>
