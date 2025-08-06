@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { AuthProvider } from '@/contexts/auth-provider';
-import { Header } from '@/components/header';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
+import { Header } from '@/components/header';
 
 export const metadata: Metadata = {
   title: 'Vercellar - App Directory',
@@ -31,9 +31,11 @@ export default function RootLayout({
       </head>
       <body className={cn('font-body antialiased min-h-screen flex flex-col')}>
         <AuthProvider>
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Toaster />
+          <div className="flex flex-col min-h-screen">
+            <Header />
+            <main className="flex-grow">{children}</main>
+            <Toaster />
+          </div>
         </AuthProvider>
       </body>
     </html>

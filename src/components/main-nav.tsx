@@ -29,15 +29,15 @@ export function MainNav({ apps }: MainNavProps) {
     .slice(0, 5);
   
   const toolCategories = [
-      {title: "Developer Tools", description: "Tools for software developers."},
-      {title: "Productivity", description: "Boost your efficiency."},
-      {title: "Marketing", description: "Tools for marketing and growth."},
-      {title: "AI", description: "The future is now."}
+      {title: "Developer Tools", description: "Tools for software developers.", href: "/tools?category=Developer+Tools"},
+      {title: "Productivity", description: "Boost your efficiency.", href: "/tools?category=Productivity"},
+      {title: "Marketing", description: "Tools for marketing and growth.", href: "/tools?category=Marketing"},
+      {title: "AI", description: "The future is now.", href: "/tools?category=AI"}
   ]
 
   const gameCategories = [
-      {title: "Games", description: "Fun and interactive experiences."},
-      {title: "Art & Design", description: "Create and explore visuals."}
+      {title: "Games", description: "Fun and interactive experiences.", href: "/games?category=Games"},
+      {title: "Art & Design", description: "Create and explore visuals.", href: "/games?category=Art+%26+Design"}
   ]
 
   return (
@@ -62,14 +62,16 @@ export function MainNav({ apps }: MainNavProps) {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Tools</NavigationMenuTrigger>
+                <NavigationMenuTrigger>
+                    <Link href="/tools">Tools</Link>
+                </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                   {toolCategories.map((cat) => (
                     <ListItem
                       key={cat.title}
                       title={cat.title}
-                      href="#"
+                      href={cat.href}
                     >
                       {cat.description}
                     </ListItem>
@@ -78,14 +80,16 @@ export function MainNav({ apps }: MainNavProps) {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Games</NavigationMenuTrigger>
+                <NavigationMenuTrigger>
+                    <Link href="/games">Games</Link>
+                </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                    {gameCategories.map((cat) => (
                     <ListItem
                       key={cat.title}
                       title={cat.title}
-                      href="#"
+                      href={cat.href}
                     >
                       {cat.description}
                     </ListItem>
@@ -94,18 +98,14 @@ export function MainNav({ apps }: MainNavProps) {
               </NavigationMenuContent>
             </NavigationMenuItem>
              <NavigationMenuItem>
-              <Link href="#" legacyBehavior passHref>
                 <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                  <a>Resources</a>
+                  <Link href="#">Resources</Link>
                 </NavigationMenuLink>
-              </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="#" legacyBehavior passHref>
                 <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                  <a>Community</a>
+                  <Link href="#">Community</Link>
                 </NavigationMenuLink>
-              </Link>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
