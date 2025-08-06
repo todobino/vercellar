@@ -11,7 +11,6 @@ import {
   SelectValue,
 } from './ui/select';
 import { getCategories } from '@/lib/data';
-import { AnimatePresence, motion } from 'framer-motion';
 
 interface AppDirectoryProps {
   apps: VercelApp[];
@@ -91,9 +90,9 @@ export function AppDirectory({ apps }: AppDirectoryProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredAndSortedApps.map((app) => (
-            <AppCard key={app.id} app={app} />
+      <div className="flex flex-col gap-4">
+          {filteredAndSortedApps.map((app, index) => (
+            <AppCard key={app.id} app={app} rank={index+1} />
           ))}
       </div>
        {filteredAndSortedApps.length === 0 && (
