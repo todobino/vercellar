@@ -110,5 +110,5 @@ export function getAppById(id: string): VercelApp | undefined {
 
 export function getCategories(): string[] {
     const allCategories = MOCK_APPS.flatMap(app => app.categories);
-    return ['All', ...Array.from(new Set(allCategories))];
+    return ['All Types', ...Array.from(new Set(allCategories))];
 }

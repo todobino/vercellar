@@ -19,7 +19,7 @@ interface AppDirectoryProps {
 }
 
 export function AppDirectory({ apps }: AppDirectoryProps) {
-  const [category, setCategory] = useState('All');
+  const [category, setCategory] = useState('All Types');
   const [sortBy, setSortBy] = useState('votes');
   const [layout, setLayout] = useState<'list' | 'grid'>('list');
   const [categories, setCategories] = useState<string[]>([]);
@@ -31,7 +31,7 @@ export function AppDirectory({ apps }: AppDirectoryProps) {
   const sortedApps = useMemo(() => {
     let filtered = apps;
 
-    if (category !== 'All') {
+    if (category !== 'All Types') {
       filtered = filtered.filter((app) => app.categories.includes(category));
     }
     
@@ -79,7 +79,7 @@ export function AppDirectory({ apps }: AppDirectoryProps) {
                 <SelectValue placeholder="Sort by" />
                 </SelectTrigger>
                 <SelectContent>
-                <SelectItem value="votes">Most Votes</SelectItem>
+                <SelectItem value="votes">Popular</SelectItem>
                 <SelectItem value="newest">Newest</SelectItem>
                 <SelectItem value="name">Name</SelectItem>
                 </SelectContent>
