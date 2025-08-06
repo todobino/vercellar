@@ -10,35 +10,84 @@ import { PlusCircle, Search } from 'lucide-react';
 import { MainNav } from './main-nav';
 import { getApps } from '@/lib/data';
 import { Input } from './ui/input';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import { VercelApp } from '@/lib/types';
+import { AppCard } from './app-card';
 
 export function Header() {
   const { isAuthenticated, login } = useAuth();
-  const [showSearch, setShowSearch] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<VercelApp[]>([]);
   const apps = getApps();
+
+  useEffect(() => {
+    if (searchQuery.length > 1) {
+      const results = apps.filter(
+        (app) =>
+          app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          app.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          app.tags.some((tag) =>
+            tag.toLowerCase().includes(searchQuery.toLowerCase())
+          )
+      );
+      setSearchResults(results);
+    } else {
+      setSearchResults([]);
+    }
+  }, [searchQuery, apps]);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">
         <Logo />
-        <MainNav apps={apps}/>
+        <MainNav apps={apps} />
         <div className="flex flex-1 items-center justify-end space-x-2">
-          {showSearch && (
-              <div className="w-full max-w-sm">
-                <Input 
-                    placeholder="Search apps..." 
-                    className="w-full"
-                    autoFocus
-                    onBlur={() => setShowSearch(false)}
-                 />
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Search className="h-4 w-4" />
+                <span className="sr-only">Search</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="top" className="h-full md:h-auto md:max-h-[80vh] overflow-y-auto">
+              <SheetHeader className="text-left">
+                <SheetTitle>Search Vercellar</SheetTitle>
+              </SheetHeader>
+              <div className="mt-4">
+                <Input
+                  placeholder="Search for apps, tools, games..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  autoFocus
+                />
               </div>
-          )}
-          <nav className="flex items-center space-x-2">
-            <Button variant="ghost" size="icon" onClick={() => setShowSearch(true)}>
-              <Search className="h-4 w-4" />
-              <span className="sr-only">Search</span>
-            </Button>
+              <div className="mt-6">
+                {searchResults.length > 0 ? (
+                    <div className="flex flex-col gap-4">
+                        {searchResults.map((app) => (
+                            <AppCard key={app.id} app={app} layout="list" />
+                        ))}
+                    </div>
+                ) : (
+                  searchQuery.length > 1 && (
+                    <p className="text-center text-muted-foreground py-8">
+                      No results found for &quot;{searchQuery}&quot;.
+                    </p>
+                  )
+                )}
+              </div>
+            </SheetContent>
+          </Sheet>
 
+          <nav className="flex items-center space-x-2">
             {isAuthenticated ? (
               <>
                 <Button asChild>
