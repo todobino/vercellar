@@ -89,16 +89,16 @@ export function MainNav({ apps }: MainNavProps) {
               </NavigationMenuContent>
             </NavigationMenuItem>
              <NavigationMenuItem>
-              <Link href="#" passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Resources
+              <Link href="#" legacyBehavior passHref>
+                <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                  <a>Resources</a>
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="#" passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Community
+              <Link href="#" legacyBehavior passHref>
+                <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+                  <a>Community</a>
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
