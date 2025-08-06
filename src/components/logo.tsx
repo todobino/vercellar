@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 
 function VercelIcon() {
@@ -17,7 +18,7 @@ function VercelIcon() {
 
 export function Logo() {
   return (
-    <Link href="/" className="flex items-center gap-2" aria-label="Vercellar Home">
+    <Link href="/" className="flex items-center gap-2 mr-6" aria-label="Vercellar Home">
       <VercelIcon />
       <h1 className="text-xl font-bold font-headline text-white">Vercellar</h1>
     </Link>
